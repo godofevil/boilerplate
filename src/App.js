@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import RateItem from './RateItem';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default () => {
+	const [data, setData] = useState(null);
+	useEffect(() => { getData() }, []);
+
+	const getData = async () => {
+		await import ('./data.json')                
+			.then(data => setData(Object.entries(data.rates)))	
+			.catch(err => console.error(err));
+    }
+
+	return (
+		<div className="app">
+			<div className="container">
+				<div className="wrap">						
+					<div className="rates">
+						{ 
+							data ?
+							data.map(item => <RateItem key={item[0]} value={item} />) :
+							null
+						}
+					</div>					
+				</div>	
+			</div>			
+		</div>         
+	)
 }
-
-export default App;
