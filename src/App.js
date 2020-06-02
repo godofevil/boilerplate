@@ -7,9 +7,12 @@ export default () => {
 	useEffect(() => { getData() }, []);
 
 	const getData = async () => {
-		await import ('./data.json')                
-			.then(data => setData(Object.entries(data.rates)))	
-			.catch(err => console.error(err));
+		try {
+			const data = await import ('./data.json');
+			setData(Object.entries(data.rates));
+		} catch(err) {
+			console.error(err);
+		}
     }
 
 	return (

@@ -6,14 +6,14 @@ const style = {
         justifyContent: 'space-between',
         width: '100%',
         padding: '10px',
-        border: '1px solid lightgrey'
-    },
+        borderBottom: '1px solid lightgrey'
+    }
 }
 
 export default props => {
     return (
         <div style={style.item}>
-            <div style={style.name}>
+            <div>
                 {props.value[0]}
             </div>
             <div>
